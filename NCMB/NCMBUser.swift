@@ -379,7 +379,8 @@ public class NCMBUser : NCMBBase {
                     break
                 case let .failure(error):
                     if let apiErr = error as? NCMBApiError {
-                        if apiErr.errorCode == .authenticationErrorByHeaderIncorrect {
+                        if apiErr.errorCode == .authenticationErrorByHeaderIncorrect
+                            || apiErr.errorCode == .noDataAvailable {
                             deleteFile()
                             _currentUser = nil
                             callback(NCMBResult<Void>.success(()))
